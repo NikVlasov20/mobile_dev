@@ -36,7 +36,10 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text('Инкремент'), backgroundColor: const Color.fromARGB(255, 61, 227, 211)),
+        appBar: AppBar(
+          title: Text('Счётчик значений'),
+          backgroundColor: const Color.fromARGB(255, 61, 227, 211),
+        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
