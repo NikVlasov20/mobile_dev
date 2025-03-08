@@ -1,0 +1,72 @@
+# Игнорировать папку build (кроме Android)
+build/
+!android/build/
+
+# Игнорировать кэш Dart
+.dart_tool/
+
+# Игнорировать кэш Pub
+.pub-cache/
+
+# Игнорировать папку .idea (Android Studio)
+.idea/
+
+# Игнорировать папку .vscode (VS Code)
+.vscode/
+
+# Игнорировать папку .gradle (Gradle)
+android/.gradle/
+
+# Игнорировать папку build в ios
+ios/build/
+ios/Flutter/Flutter.xcworkspace/
+ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/AppFrameworkInfo.plist
+
+# Игнорировать папку build в web
+web/build/
+
+# Игнорировать папку build в linux
+linux/build/
+
+# Игнорировать папку build в macos
+macos/build/
+
+# Игнорировать папку build в windows
+windows/build/
+
+# Игнорировать временные файлы и кэш
+*.log
+*.lock
+*.tmp
+*.bak
+
+# Игнорировать файлы отладки
+*.DS_Store
+Thumbs.db
+
+# Игнорировать файлы, связанные с Flutter
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.metadata
+
+# Игнорировать файлы, связанные с iOS
+*.ipa
+*.dSYM
+
+# Игнорировать файлы, связанные с Web
+*.html
+*.js
+*.css
+
+# Игнорировать файлы, связанные с Linux
+*.AppImage
+
+# Игнорировать файлы, связанные с macOS
+*.dmg
+
+# Игнорировать файлы, связанные с Windows
+*.exe
+*.msi
