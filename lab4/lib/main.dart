@@ -18,7 +18,7 @@ class DormitoryPage extends StatefulWidget {
 }
 
 class _DormitoryPageState extends State<DormitoryPage> {
-  int _likeCount = 27; // Начальное значение счетчика
+  int _likeCount = 0; // Начальное значение счетчика
 
   void _incrementLikeCount() {
     setState(() {
@@ -52,13 +52,13 @@ class _DormitoryPageState extends State<DormitoryPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Image.network(
-              'URL_TO_IMAGE', // Замените на URL изображения
+              'https://sun9-40.userapi.com/s/v1/ig2/m8wRvQ70t4diy--ngylsjzqPH0Q0zKd_zXn2MDsAG7jW6_HqWtmFZS9vQ-jA2h6Ybe842VvvBt7WkXUWPvdXymqG.jpg?quality=95&as=32x23,48x34,72x51,108x77,160x114,240x171,360x257,480x343,540x385,640x457,720x514,1080x771,1280x913,1435x1024&from=bu&u=vkdmz6YeWjWtphWD_EJyCAmvnI8spNDZd83OvRNVUpU&cs=604x431', // Замените на URL изображения
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
             ListTile(
-              title: Text('Общежитие №29'),
+              title: Text('Общежитие №20'),
               subtitle: Text('Краснодар, ул. Калинина, 13'),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -86,7 +86,7 @@ class _DormitoryPageState extends State<DormitoryPage> {
                     Text('Позвонить'),
                   ],
                 ),
-                SizedBox(width: 20),
+                SizedBox(width: 30),
                 Column(
                   children: [
                     IconButton(
@@ -104,7 +104,7 @@ class _DormitoryPageState extends State<DormitoryPage> {
                     IconButton(
                       icon: Icon(Icons.share, color: Colors.green, size: 30),
                       onPressed: () {
-                        _launchURL('https://vk.com/share.php?url=YOUR_URL'); // Замените на нужный URL
+                        _launchURL('https://yandex.ru/maps'); // Замените на нужный URL
                       },
                     ),
                     Text('Поделиться'),
