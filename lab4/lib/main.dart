@@ -86,7 +86,7 @@ class _DormitoryPageState extends State<DormitoryPage> {
                     Text('Позвонить'),
                   ],
                 ),
-                SizedBox(width: 20),
+                SizedBox(width: 30),
                 Column(
                   children: [
                     IconButton(
@@ -104,7 +104,7 @@ class _DormitoryPageState extends State<DormitoryPage> {
                     IconButton(
                       icon: Icon(Icons.share, color: Colors.green, size: 30),
                       onPressed: () {
-                        _launchURL('https://vk.com/share.php?url=YOUR_URL'); // Замените на нужный URL
+                        _launchURL('https://yandex.ru/maps'); // Замените на нужный URL
                       },
                     ),
                     Text('Поделиться'),
