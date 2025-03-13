@@ -5,7 +5,10 @@ class FirstScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Первый экран")),
+      appBar: AppBar(
+        title: Text("Первый экран"),
+        backgroundColor: Colors.green, // Зелёный цвет заголовка
+      ),
       body: Center(
         child: ElevatedButton(
           onPressed: () async {
@@ -17,11 +20,14 @@ class FirstScreen extends StatelessWidget {
 
             // Отображение результата в виде всплывающего уведомления
             if (result != null) {
-              ScaffoldMessenger.of(
-                context,
-              ).showSnackBar(SnackBar(content: Text("Вы выбрали: $result")));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(" $result")),
+              );
             }
           },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green, // Зелёный цвет кнопки
+          ),
           child: Text("Перейти на второй экран"),
         ),
       ),
