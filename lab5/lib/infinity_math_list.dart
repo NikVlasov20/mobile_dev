@@ -8,7 +8,14 @@ class InfinityMathList extends StatelessWidget {
       appBar: AppBar(title: Text("Бесконечный список с возведением в степень")),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return ListTile(title: Text("2 в степени $index = ${pow(2, index)}"));
+          // Используем BigInt для работы с большими числами
+          final result = BigInt.from(2).pow(index);
+
+          // Логируем значение для отладки
+          print("2 в степени $index = $result");
+
+          // Возвращаем элемент списка
+          return ListTile(title: Text("2 в степени $index = $result"));
         },
       ),
     );
