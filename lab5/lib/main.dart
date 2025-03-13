@@ -20,7 +20,13 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Списки в Flutter")),
+      appBar: AppBar(
+        title: Text(
+          "Списки в Flutter",
+          style: TextStyle(color: Colors.black), 
+        ),
+        backgroundColor: Colors.grey,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +38,13 @@ class HomeScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => SimpleList()),
                 );
               },
-              child: Text("Простой список"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey, 
+              ),
+              child: Text(
+                "Простой список",
+                style: TextStyle(color: Colors.black), 
+              ),
             ),
             ElevatedButton(
               onPressed: () {
@@ -41,7 +53,13 @@ class HomeScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => InfinityList()),
                 );
               },
-              child: Text("Бесконечный список со строками"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey, 
+              ),
+              child: Text(
+                "Бесконечный список со строками",
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
@@ -50,7 +68,13 @@ class HomeScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => InfinityMathList()),
                 );
               },
-              child: Text("Бесконечный список с возведением в степень"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey, 
+              ),
+              child: Text(
+                "Бесконечный список с возведением в степень",
+                style: TextStyle(color: Colors.black), 
+              ),
             ),
           ],
         ),
