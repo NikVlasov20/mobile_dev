@@ -9,7 +9,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Калькулятор площади',
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(
+        primaryColor: Colors.green, // Основной цвет
+        colorScheme: ColorScheme.light(secondary: Colors.green), // Цвет акцента
+        appBarTheme: AppBarTheme(
+          color: Colors.green, // Цвет заголовка
+        ),
+      ),
       home: MyHomePage(),
     );
   }
@@ -43,7 +49,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Калькулятор площади')),
+      appBar: AppBar(
+        title: Text('Калькулятор площади'),
+      ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Form(
@@ -51,7 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Ширина (мм):', style: TextStyle(fontSize: 20.0)),
+              Text(
+                'Ширина (мм):',
+                style: TextStyle(fontSize: 20.0),
+              ),
               TextFormField(
                 controller: _widthController,
                 validator: (value) {
@@ -67,7 +78,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 keyboardType: TextInputType.number,
               ),
               SizedBox(height: 20.0),
-              Text('Высота (мм):', style: TextStyle(fontSize: 20.0)),
+              Text(
+                'Высота (мм):',
+                style: TextStyle(fontSize: 20.0),
+              ),
               TextFormField(
                 controller: _heightController,
                 validator: (value) {
@@ -85,6 +99,9 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: _calculateArea,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green, // Цвет кнопки
+                ),
                 child: Text('Вычислить'),
               ),
             ],
