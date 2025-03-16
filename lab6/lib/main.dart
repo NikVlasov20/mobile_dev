@@ -9,9 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Калькулятор площади',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.green),
       home: MyHomePage(),
     );
   }
@@ -35,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('S = $width * $height = $area'),
+          content: Text('S = $width * $height = $area (мм²)'),
           backgroundColor: Colors.green,
         ),
       );
@@ -45,9 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Калькулятор площади'),
-      ),
+      appBar: AppBar(title: Text('Калькулятор площади')),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Form(
@@ -55,36 +51,32 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                'Ширина:',
-                style: TextStyle(fontSize: 20.0),
-              ),
+              Text('Ширина (мм):', style: TextStyle(fontSize: 20.0)),
               TextFormField(
                 controller: _widthController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Пожалуйста, введите ширину';
                   }
-                  if (double.tryParse(value) == null) {
-                    return 'Пожалуйста, введите числовое значение';
+                  double? width = double.tryParse(value);
+                  if (width == null || width < 0) {
+                    return 'Пожалуйста, введите положительное числовое значение';
                   }
                   return null;
                 },
                 keyboardType: TextInputType.number,
               ),
               SizedBox(height: 20.0),
-              Text(
-                'Высота:',
-                style: TextStyle(fontSize: 20.0),
-              ),
+              Text('Высота (мм):', style: TextStyle(fontSize: 20.0)),
               TextFormField(
                 controller: _heightController,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Пожалуйста, введите высоту';
                   }
-                  if (double.tryParse(value) == null) {
-                    return 'Пожалуйста, введите числовое значение';
+                  double? height = double.tryParse(value);
+                  if (height == null || height < 0) {
+                    return 'Пожалуйста, введите положительное числовое значение';
                   }
                   return null;
                 },
