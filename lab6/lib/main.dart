@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('S = $width * $height = $area (мм²)'),
+          content: Text('S = $width * $height = $area '),
           backgroundColor: Colors.green,
         ),
       );
@@ -60,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Ширина (мм):',
+                'Ширина :',
                 style: TextStyle(fontSize: 20.0),
               ),
               TextFormField(
@@ -79,7 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               SizedBox(height: 20.0),
               Text(
-                'Высота (мм):',
+                'Высота :',
                 style: TextStyle(fontSize: 20.0),
               ),
               TextFormField(
