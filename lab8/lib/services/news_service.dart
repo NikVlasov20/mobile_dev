@@ -9,6 +9,9 @@ class NewsService {
 
     if (response.statusCode == 200) {
       List<dynamic> body = jsonDecode(response.body);
+      if (body.isEmpty) {
+        return []; // Если данные пустые, возвращаем пустой список
+      }
       List<News> news = body.map((dynamic item) => News.fromJson(item)).toList();
       return news;
     } else {
