@@ -1,123 +1,73 @@
-import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+import 'package:intl/intl_standalone.dart';
+import 'models/news_model.dart';
+import 'services/news_service.dart';
 
-// Функция для получения данных с API
-Future<List<Photo>> fetchPhotos(http.Client client) async {
-  final response = await client.get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
-  if (response.statusCode == 200) {
-    return compute(parsePhotos, utf8.decode(response.bodyBytes));
-  } else {
-    throw Exception('Failed to load photos');
-  }
+void main() {
+  runApp(MyApp());
 }
-
-// Функция для парсинга JSON
-List<Photo> parsePhotos(String responseBody) {
-  final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-  return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
-}
-
-// Модель данных для фотографии
-class Photo {
-  final int albumId;
-  final int id;
-  final String title;
-  final String url;
-  final String thumbnailUrl;
-
-  const Photo({
-    required this.albumId,
-    required this.id,
-    required this.title,
-    required this.url,
-    required this.thumbnailUrl,
-  });
-
-  factory Photo.fromJson(Map<String, dynamic> json) {
-    return Photo(
-      albumId: json['albumId'] as int,
-      id: json['id'] as int,
-      title: json['title'] as String,
-      url: json['url'] as String,
-      thumbnailUrl: json['thumbnailUrl'] as String,
-    );
-  }
-}
-
-// Главный виджет приложения
-void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'Фотогалерея';
     return MaterialApp(
-      title: appTitle,
+      title: 'Лента новостей КубГАУ',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
-      home: const MyHomePage(title: appTitle),
+      home: NewsList(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class NewsList extends StatefulWidget {
+  @override
+  _NewsListState createState() => _NewsListState();
+}
 
-  final String title;
+class _NewsListState extends State<NewsList> {
+  late Future<List<News>> futureNews;
+
+  @override
+  void initState() {
+    super.initState();
+    futureNews = NewsService().fetchNews();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text('Лента новостей КубГАУ'),
       ),
-      body: FutureBuilder<List<Photo>>(
-        future: fetchPhotos(http.Client()),
+      body: FutureBuilder<List<News>>(
+        future: futureNews,
         builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const Center(
-              child: Text('Ошибка запроса!'),
-            );
-          } else if (snapshot.hasData) {
-            return PhotosList(photos: snapshot.data!);
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Ошибка: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('Новости не найдены'));
           } else {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                News news = snapshot.data![index];
+                return Card(
+                  margin: EdgeInsets.all(8.0),
+                  child: ListTile(
+                    title: Text(Bidi.stripHtmlIfNeeded(news.title)),
+                    subtitle: Text(Bidi.stripHtmlIfNeeded(news.content)),
+                    trailing: Text(news.date),
+                  ),
+                );
+              },
             );
           }
         },
       ),
-    );
-  }
-}
-
-// Виджет для отображения списка фотографий
-class PhotosList extends StatelessWidget {
-  const PhotosList({Key? key, required this.photos}) : super(key: key);
-
-  final List<Photo> photos;
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-      ),
-      itemCount: photos.length,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-            Image.network(photos[index].thumbnailUrl),
-            Text(photos[index].title),
-          ],
-        );
-      },
     );
   }
 }
